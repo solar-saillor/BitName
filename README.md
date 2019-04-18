@@ -2,9 +2,9 @@
 
 > Protocol prefix: `1LX1b3YmwdE82kMPE291TCUsBErQ7sSfRJ`
 
-BitName is an OP_RETURN protocol to obtain one-to-one mappings between Bitcoin txids and human-readable strings. 
+BitName is an `OP_RETURN` protocol to obtain one-to-one mappings between Bitcoin txids and human-readable strings. 
 
-Users register and exchange ownership of BitName by simply sending specific OP_RETURN on the blockchain. 
+Users register and exchange ownership of BitName by simply sending specific `OP_RETURN` on the blockchain. 
 
 Planaria nodes that run the BitName protocol then crawl the blockchain and construct the BitName mapping in order to serve search queries.
 
@@ -12,7 +12,7 @@ Planaria nodes that run the BitName protocol then crawl the blockchain and const
 
 ### 1. OP_RETURN Contents
 
-Hosting server-less websites by storing page contents in Bitcoin's op_return space has become a common practice in the Bitcoin (BSV) development world . 
+Hosting server-less websites by storing page contents in Bitcoin's `OP_RETURN` space has become a common practice in the Bitcoin (BSV) development world . 
 
 Currently such pages are mostly accessed by looking up their respective 256 bits txids, as defined by the `B://` protocol. A txid looks like this:
 
@@ -22,7 +22,7 @@ Currently such pages are mostly accessed by looking up their respective 256 bits
 
 ### 2. Problems
 
-While txid can serve as the unique identifier of any op_return contents, they are difficult for humans to identify, to associate, and to remember. 
+While txid can serve as the unique identifier of any `OP_RETURN` contents, they are difficult for humans to identify, to associate, and to remember. 
 
 What is needed is a standard mapping from txids in machine format to the limited and valuable human cognitive space, much like the mapping between IP addresses and human-readable domain names on the current internet.
 
@@ -48,7 +48,7 @@ Each BitName is owned by a Bitcoin address, which can be a different address tha
 
 ### 2. Registration
 
-Registering a BitName under an address and establishing its mapping to a txid is as simple as sending an op_return transaction that contains a message in the following format:
+Registering a BitName under an address and establishing its mapping to a txid is as simple as sending an `OP_RETURN` transaction that contains a message in the following format:
 
 ```
 OP_RETURN 1LX1b3YmwdE82kMPE291TCUsBErQ7sSfRJ [owner address] [mapped txid] [BitName] 	
@@ -70,7 +70,7 @@ An auction example can be illustrated below:
 
 ### 3. Update
 
-Once a BitName is registered, its owner can update its owner address and mapped txid. All that is needed is an update transaction in the blockchain that has an op_return output containing a message in the following format, similar to that of the registration message:
+Once a BitName is registered, its owner can update its owner address and mapped txid. All that is needed is an update transaction in the blockchain that has an `OP_RETURN` output containing a message in the following format, similar to that of the registration message:
 
 ```
 OP_RETURN 1LX1b3YmwdE82kMPE291TCUsBErQ7sSfRJ [new owner address] [new mapped txid] [BitName] 
@@ -78,7 +78,7 @@ OP_RETURN 1LX1b3YmwdE82kMPE291TCUsBErQ7sSfRJ [new owner address] [new mapped txi
 
 The update tx needs to satisfy the following conditions to be considered valid:
 
-- The transfer tx has to have at least one input from the previous owner address of the updated BitName
+- The update tx has to have at least one input from the previous owner address of the updated BitName
 - The new mapped txid corresponds to an existing tx that has `OP_RETURN` output 
 - There is no other update transaction for the same BitName in the same block that meets the first condition. Otherwise, all updates for this BitName in this block are voided. 
 
